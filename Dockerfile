@@ -17,6 +17,7 @@ RUN apk add --update --no-cache \
   curl \
   freetype \
   git \
+  gzip \
   libbz2 \
   libffi \
   libffi-dev \
