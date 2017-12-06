@@ -29,8 +29,8 @@ RUN apk add --update --no-cache \
   libxslt \
   mysql-client \
   openssh \
-  openssl \
-  openssl-dev \
+  libressl \
+  libressl-dev \
   procps \
   postgresql-client \
   rsync \
@@ -67,12 +67,12 @@ RUN set -xe \
     LDFLAGS="$PHP_LDFLAGS" \
   && docker-php-source extract \
   && cd /usr/src/php \
-  && docker-php-ext-install bcmath mcrypt zip bz2 mbstring pcntl xsl mysqli pgsql pdo_mysql pdo_pgsql \
+  && docker-php-ext-install bcmath zip bz2 mbstring pcntl xsl mysqli pgsql pdo_mysql pdo_pgsql \
   && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
   && docker-php-ext-install gd \
   && docker-php-ext-configure ldap --with-libdir=lib/ \
   && docker-php-ext-install ldap \
-  && git clone --branch="php7" https://github.com/phpredis/phpredis.git /usr/src/php/ext/redis \
+  && git clone --branch="develop" https://github.com/phpredis/phpredis.git /usr/src/php/ext/redis \
   && docker-php-ext-install redis \
   && php -m && php -r "new Redis();" \
   && docker-php-source delete \
