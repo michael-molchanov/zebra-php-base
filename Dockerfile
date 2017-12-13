@@ -92,7 +92,7 @@ RUN apk add --update --no-cache ruby ruby-dev \
   && gem install --no-ri --no-rdoc -v 0.0.85 docman
 
 # Install nodejs and grunt.
-RUN apk add --update --no-cache nodejs nodejs-dev \
+RUN apk add --update --no-cache nodejs nodejs-dev nodejs-npm \
   && rm -rf /var/cache/apk/* \
   && npm install -g grunt-cli \
   && grunt --version
