@@ -75,5 +75,27 @@ RUN set -xe \
   && git clone --branch="develop" https://github.com/phpredis/phpredis.git /usr/src/php/ext/redis \
   && docker-php-ext-install redis \
   && php -m && php -r "new Redis();" \
+  && pecl install channel://pecl.php.net/mcrypt-1.0.1 \
   && docker-php-source delete \
   && apk del .build-deps
+
+# Set the Drush version.
+ENV DRUSH_VERSION 8.1.15
+
+# Install Drush 8 with the phar file.
+RUN curl -fsSL -o /usr/local/bin/drush "https://github.com/drush-ops/drush/releases/download/$DRUSH_VERSION/drush.phar" \
+  && chmod +x /usr/local/bin/drush
+
+# Install docman.
+RUN apk add --update --no-cache ruby ruby-dev \
+  && rm -rf /var/cache/apk/* \
+  && gem install --no-ri --no-rdoc -v 0.0.85 docman
+
+# Install nodejs and grunt.
+RUN apk add --update --no-cache nodejs nodejs-dev \
+  && rm -rf /var/cache/apk/* \
+  && npm install -g grunt-cli \
+  && grunt --version
+
+# Install compass.
+RUN gem install --no-ri --no-rdoc compass
