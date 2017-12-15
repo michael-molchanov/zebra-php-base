@@ -31,6 +31,7 @@ RUN apk add --update --no-cache \
   openssh \
   libressl \
   libressl-dev \
+  patch \
   procps \
   postgresql-client \
   rsync \
