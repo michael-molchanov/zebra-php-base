@@ -79,3 +79,6 @@ RUN set -xe \
   && pecl install channel://pecl.php.net/mcrypt-1.0.1 \
   && docker-php-source delete \
   && apk del .build-deps
+
+# Add composer downloads optimisation.
+RUN composer global require hirak/prestissimo
