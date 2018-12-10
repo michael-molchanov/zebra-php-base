@@ -14,10 +14,14 @@ RUN apk add --update --no-cache \
   bash \
   build-base \
   bzip2 \
+  ca-certificates \
   curl \
   freetype \
+  fuse \
   git \
+  grep \
   gzip \
+  jq \
   libbz2 \
   libffi \
   libffi-dev \
@@ -27,6 +31,7 @@ RUN apk add --update --no-cache \
   libpng \
   libxml2 \
   libxslt \
+  make \
   mysql-client \
   openssh \
   libressl \
@@ -34,6 +39,9 @@ RUN apk add --update --no-cache \
   patch \
   procps \
   postgresql-client \
+  python \
+  py-crcmod \
+  py-pip \
   rsync \
   sqlite \
   strace \
@@ -41,7 +49,28 @@ RUN apk add --update --no-cache \
   unzip \
   wget \
   zlib \
-  && rm -rf /var/lib/apt/lists/*
+  && rm -rf /var/lib/apt/lists/* \
+  && pip install yq
+
+COPY --from=hairyhenderson/gomplate:v3.1.0-slim /gomplate /bin/gomplate
+
+# Install goofys
+ENV GOOFYS_VERSION 0.19.0
+RUN curl --fail -sSL -o goofys https://github.com/kahing/goofys/releases/download/v${GOOFYS_VERSION}/goofys \
+  && mv goofys /usr/local/bin/ \
+  && chmod +x /usr/local/bin/goofys \
+  && mkdir /lib64 \
+  && ln -s /lib/libc.musl-x86_64.so.1 /lib64/ld-linux-x86-64.so.2
+
+
+# Install fd
+ENV FD_VERSION 7.2.0
+RUN curl --fail -sSL -o fd.tar.gz https://github.com/sharkdp/fd/releases/download/v${FD_VERSION}/fd-v${FD_VERSION}-x86_64-unknown-linux-musl.tar.gz \
+  && tar -zxf fd.tar.gz \
+  && cp fd-v${FD_VERSION}-x86_64-unknown-linux-musl/fd /usr/local/bin/ \
+  && rm -f fd.tar.gz \
+  && rm -fR fd-v${FD_VERSION}-x86_64-unknown-linux-musl \
+  && chmod +x /usr/local/bin/fd
 
 # PHP modules.
 RUN set -xe \
