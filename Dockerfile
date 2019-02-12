@@ -52,7 +52,7 @@ RUN apk add --update --no-cache \
   wget \
   zlib \
   && rm -rf /var/lib/apt/lists/* \
-  && pip install yq
+  && pip install yq requests
 
 COPY --from=hairyhenderson/gomplate:v3.1.0-slim /gomplate /bin/gomplate
 
