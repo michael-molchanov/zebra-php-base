@@ -19,6 +19,7 @@ RUN apk add --update --no-cache \
   freetype \
   fuse \
   git \
+  git-lfs \
   grep \
   gzip \
   jq \
@@ -31,6 +32,7 @@ RUN apk add --update --no-cache \
   libpng \
   libxml2 \
   libxslt \
+  libzip \
   make \
   mysql-client \
   openssh \
@@ -89,6 +91,7 @@ RUN set -xe \
     bzip2-dev \
     libstdc++ \
     libxslt-dev \
+    libzip-dev \
     openldap-dev \
     make \
     patch \
@@ -106,7 +109,7 @@ RUN set -xe \
   && git clone --branch="develop" https://github.com/phpredis/phpredis.git /usr/src/php/ext/redis \
   && docker-php-ext-install redis \
   && php -m && php -r "new Redis();" \
-  && pecl install channel://pecl.php.net/mcrypt-1.0.1 \
+  && pecl install channel://pecl.php.net/mcrypt-1.0.2 \
   && docker-php-source delete \
   && apk del .build-deps
 
