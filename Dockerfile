@@ -11,6 +11,7 @@ RUN chown root:root /root/.ssh/config && chmod 600 /root/.ssh/config
 
 # Install base.
 RUN apk add --update --no-cache \
+  autoconf \
   bash \
   build-base \
   bzip2 \
@@ -103,8 +104,6 @@ RUN set -xe \
     libxslt-dev \
     libzip-dev \
     openldap-dev \
-    make \
-    patch \
     postgresql-dev \
   && export CFLAGS="$PHP_CFLAGS" \
     CPPFLAGS="$PHP_CPPFLAGS" \
