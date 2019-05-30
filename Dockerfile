@@ -109,7 +109,7 @@ RUN set -xe \
     LDFLAGS="$PHP_LDFLAGS" \
   && docker-php-source extract \
   && cd /usr/src/php \
-  && docker-php-ext-install bcmath zip bz2 mbstring pcntl xsl mysqli pgsql pdo_mysql pdo_pgsql \
+  && docker-php-ext-install bcmath zip bz2 gmp mbstring pcntl xsl mysqli pgsql pdo_mysql pdo_pgsql \
   && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
   && docker-php-ext-install gd \
   && docker-php-ext-configure ldap --with-libdir=lib/ \
