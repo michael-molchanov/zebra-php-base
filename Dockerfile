@@ -20,6 +20,8 @@ RUN apk add --update --no-cache \
   fuse \
   git \
   git-lfs \
+  gmp \
+  gmp-dev \
   grep \
   gzip \
   jq \
