@@ -11,6 +11,8 @@ RUN chown root:root /root/.ssh/config && chmod 600 /root/.ssh/config
 
 # Install base.
 RUN apk add --update --no-cache \
+  autoconf \
+  automake \
   bash \
   build-base \
   bzip2 \
@@ -77,7 +79,7 @@ RUN curl --fail -sSL -o fd.tar.gz https://github.com/sharkdp/fd/releases/downloa
   && chmod +x /usr/local/bin/fd
 
 # Install variant
-ENV VARIANT_VERSION 0.35.1
+ENV VARIANT_VERSION 0.36.4
 RUN curl --fail -sSL -o variant.tar.gz https://github.com/mumoshu/variant/releases/download/v${VARIANT_VERSION}/variant_${VARIANT_VERSION}_linux_amd64.tar.gz \
     && mkdir -p variant \
     && tar -zxf variant.tar.gz -C variant \
