@@ -42,6 +42,7 @@ RUN apk add --update --no-cache \
   openssh \
   libressl \
   libressl-dev \
+  oniguruma \
   patch \
   procps \
   postgresql-client \
@@ -106,6 +107,7 @@ RUN set -xe \
     libstdc++ \
     libxslt-dev \
     libzip-dev \
+    oniguruma-dev \
     openldap-dev \
     postgresql-dev \
   && export CFLAGS="$PHP_CFLAGS" \
